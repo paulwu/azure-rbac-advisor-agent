@@ -1,0 +1,3 @@
+# Azure RBAC Advisor — runtime output folders (not tracked in source control)
+log/
+answer/
