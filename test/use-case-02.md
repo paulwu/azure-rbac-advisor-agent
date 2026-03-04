@@ -2,7 +2,7 @@
 
 ## Section 1 — Prompt
 
-I want to create an Agentic AI Workload in Azure
+I want to create an Agentic AI Workload in Azure with the following resources. Show me the roles I need:
 Application Insights
 Azure AI Search
 Azure AI Services
