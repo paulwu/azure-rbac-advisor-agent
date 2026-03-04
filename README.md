@@ -4,6 +4,24 @@ A structured reference library of Azure Role-Based Access Control (RBAC) least-p
 
 ---
 
+## Table of Contents
+
+- [Purpose](#purpose)
+- [Repository Structure](#repository-structure)
+- [Using the Azure RBAC Advisor (Copilot Custom Agent)](#using-the-azure-rbac-advisor-copilot-custom-agent)
+  - [How to Activate](#how-to-activate)
+  - [Recommended Model](#recommended-model)
+  - [What the Agent Can Answer](#what-the-agent-can-answer)
+  - [Sample Prompts](#sample-prompts)
+  - [Full Workload Deployment Example](#full-workload-deployment-example)
+  - [Guided Scoping Flow](#guided-scoping-flow)
+- [Test Use Cases](#test-use-cases)
+- [Authoritative Sources](#authoritative-sources)
+- [First-Time Setup](#first-time-setup)
+- [Contributing](#contributing)
+
+---
+
 ## Purpose
 
 This repository helps platform engineers, security teams, and workload developers answer the question:
@@ -20,25 +38,28 @@ Every resource file documents the least-privileged built-in role needed for **Cr
 .
 ├── resources/
 │   ├── README.md                        # Library overview and RBAC principles
-│   ├── platform-landing-zone/           # 12 resources (shared services, governance)
-│   ├── workload-landing-zone/           # 11 resources (application workloads)
+│   ├── platform-landing-zone/           # 16 resources (shared services, governance)
+│   ├── workload-landing-zone/           # 17 resources (application workloads)
 │   ├── data-landing-zone/               # 9 resources (data platforms and analytics)
-│   └── ai-landing-zone/                 # 7 resources (AI/ML services)
+│   └── ai-landing-zone/                 # 11 resources (AI/ML services)
 ├── .github/
 │   ├── agents/
 │   │   └── azure-rbac-advisor.agent.md  # Copilot custom agent
 │   └── copilot-instructions.md          # Authoring rules for future contributions
+├── test/
+│   ├── use-case-01.md                   # CI/CD pipeline pushing images to ACR
+│   └── use-case-02.md                   # Agentic AI Workload (16 resources)
 └── README.md
 ```
 
 ### Resources by Landing Zone
 
-| Landing Zone | Resources Covered |
-|---|---|
-| **Platform** | Management Groups, Azure Policy, Log Analytics Workspace, Azure Monitor, Microsoft Defender for Cloud, Azure Key Vault, Hub Virtual Network, Azure Firewall, VPN/ExpressRoute Gateway, Azure Bastion, Private DNS Zones, Azure Automation Account |
-| **Workload** | Spoke Virtual Network, Network Security Groups, Virtual Machines, App Service, Azure SQL Database, Azure Storage Account *(with Blob/File/Queue/Table breakdowns)*, Azure Key Vault, Azure Load Balancer, Application Gateway, Azure Container Registry, Azure Kubernetes Service |
-| **Data** | Azure Data Factory, Azure Synapse Analytics, Azure Data Lake Storage Gen2, Azure Databricks, Azure Event Hubs, Azure Cosmos DB, Azure Stream Analytics, Microsoft Purview, Azure Data Explorer |
-| **AI** | Azure Machine Learning, Azure OpenAI, Azure AI Services, Azure AI Search, Azure Bot Service, Azure Applied AI Services, Azure AI Foundry |
+| Landing Zone | Count | Resources Covered |
+|---|---|---|
+| **Platform** | 16 | Management Groups, Azure Policy, Log Analytics Workspace, Azure Monitor, Microsoft Defender for Cloud, Azure Key Vault, Hub Virtual Network, Azure Firewall, VPN/ExpressRoute Gateway, Azure Bastion, Private DNS Zones, Azure Automation Account, API Management, Managed Identity, Recovery Services Vault, Storage Sync Service |
+| **Workload** | 17 | Spoke Virtual Network, Network Security Groups, Virtual Machines, App Service, App Service Plan, Azure SQL Database, Azure Storage Account *(with Blob/File/Queue/Table breakdowns)*, Azure Key Vault, Azure Load Balancer, Application Gateway, Azure Container Registry, Azure Kubernetes Service, Azure Container Apps, Azure Container Apps Environment, Azure Functions, Azure Logic Apps, Azure SSH Key |
+| **Data** | 9 | Azure Data Factory, Azure Synapse Analytics, Azure Data Lake Storage Gen2, Azure Databricks, Azure Event Hubs, Azure Cosmos DB, Azure Stream Analytics, Microsoft Purview, Azure Data Explorer |
+| **AI** | 11 | Azure Machine Learning, Azure OpenAI, Azure AI Services, Azure AI Search, Azure Bot Service, Azure Applied AI Services, Azure AI Foundry, Azure AI Document Intelligence, Azure AI Content Understanding, Grounding with Bing Search, Foundry IQ |
 
 ---
 
@@ -95,6 +116,24 @@ The **Azure RBAC Advisor** is a GitHub Copilot custom agent defined in `.github/
 
 1. Go to [github.com/copilot/agents](https://github.com/copilot/agents)
 2. Select this repository and choose **Azure RBAC Advisor** from the agent list
+
+### Recommended Model
+
+For best results, select **Claude Opus 4.6 (1M context)(Internal only)** when running the Azure RBAC Advisor. Its large context window allows the agent to load the full `resources/` library in a single pass, ensuring role recommendations are grounded across all 53 resource files simultaneously — particularly important for complex cross-resource prompts covering many services at once (e.g., a full Agentic AI Workload with 16 resources).
+
+**To select the model in the GitHub Copilot CLI:**
+
+```bash
+# Press 'm' or use the model picker at the prompt to switch models
+# Select: Claude Opus 4.6 (1M context)(Internal only)
+```
+
+**To select the model in VS Code Copilot Chat:**
+
+1. Click the model selector in the Copilot Chat panel (bottom of the input box)
+2. Choose **Claude Opus 4.6 (1M context)(Internal only)**
+
+> **Note:** The 1M context model is available to internal users only. If unavailable in your environment, **Claude Sonnet 4.6** is a capable fallback for most single-landing-zone queries.
 
 ### What the Agent Can Answer
 
@@ -193,6 +232,38 @@ If your question is broad or outside RBAC scope, the agent will guide you with t
 1. **What workload or landing zone type** are you working with?
 2. **Which specific Azure resources** do you want to focus on?
 3. **Do you want the output saved** to a file, and if so, what filename?
+
+---
+
+## Test Use Cases
+
+The `test/` folder contains reference use cases that validate agent output quality and demonstrate the range of questions the Azure RBAC Advisor can answer. Each file has two sections: the exact prompt used (`Section 1`) and the expected RBAC output (`Section 2`).
+
+| File | Scenario | Resources |
+|---|---|---|
+| [`test/use-case-01.md`](test/use-case-01.md) | CI/CD pipeline pushing container images to Azure Container Registry | ACR |
+| [`test/use-case-02.md`](test/use-case-02.md) | Agentic AI Workload on Microsoft Foundry with Private Endpoint isolation | 16 resources: AI Foundry, Foundry Project, Foundry IQ, Azure OpenAI, Azure AI Search, Azure AI Services, Document Intelligence, Azure Cosmos DB, Azure Storage, Azure Key Vault, Application Insights, Log Analytics Workspace, Virtual Network, Private Endpoints, Private DNS Zones, Azure DNS Private Resolver |
+
+### How to Run a Use Case
+
+Use cases are designed to be copy-pasted directly into the Azure RBAC Advisor agent. To run one:
+
+1. **Launch the CLI** and select the Azure RBAC Advisor agent:
+   ```bash
+   cd azure-rbac-agent-repo
+   copilot
+   # then: /agent → Azure RBAC Advisor
+   ```
+
+2. **Select the recommended model** — Claude Opus 4.6 (1M context)(Internal only) — using the model picker.
+
+3. **Copy the prompt** from `Section 1` of the use case file.
+
+4. **Paste it** into the agent chat and press Enter.
+
+5. **Compare** the agent's response against the expected output in `Section 2`.
+
+> **Tip:** Switch to **Autopilot mode** (`Shift+Tab`) before running multi-resource use cases like `use-case-02.md` — the agent will process all 16 resources in a single uninterrupted pass and save the full output to `answer/`.
 
 ---
 
