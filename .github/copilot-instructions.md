@@ -165,6 +165,25 @@ Rules:
 - If a resource has no runtime dependencies, write a single row: `| None | — | This resource has no runtime dependencies. | — |`
 - Content must be grounded in official [Microsoft Learn](https://learn.microsoft.com/azure/) documentation for the service.
 
+#### Row Lock Marker
+
+Any row in the Runtime Dependencies table may be marked as **hand-tweaked and read-only** by appending ` 🔒` to the value in the **Required / Optional** column:
+
+```markdown
+| [Azure Storage Account](./azure-storage-account.md) | `Microsoft.Storage/storageAccounts` | Custom purpose note hand-written by the team. | Optional (project-specific) 🔒 |
+```
+
+**Copilot must not:**
+- Modify, reword, or remove any row where the Required / Optional cell ends with ` 🔒`.
+- Add or remove the `🔒` marker from any row — only humans set and unset it.
+- Move a locked row to a different position in the table.
+
+**Copilot must:**
+- Leave the entire locked row exactly as written (all four cells).
+- When adding new rows to a table that contains locked rows, insert only in the unlocked rows area without disturbing locked rows.
+
+The marker signals that the row contains project-specific, environment-specific, or otherwise curated content that must not be overwritten by automated tooling.
+
 ### 7. Notes / Considerations
 ```markdown
 ## Notes / Considerations
@@ -287,3 +306,5 @@ When adding a `Related Resources` link to Key Vault, link to the file in the **s
 - ❌ Store credentials, keys, connection strings, or subscription IDs in any file.
 - ❌ Reference internal Microsoft documentation that is not publicly accessible.
 - ❌ Recommend disabling security features (soft-delete, purge protection, private endpoints) for convenience.
+- ❌ Modify, reword, remove, or reorder any Runtime Dependencies row that ends with ` 🔒` in the Required / Optional column.
+- ❌ Add or remove the `🔒` marker from any row.
