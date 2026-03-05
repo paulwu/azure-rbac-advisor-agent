@@ -24,14 +24,14 @@ Azure Databricks is a managed Apache Spark analytics platform. In a Data Landing
 
 ### Azure RBAC — Workspace Management
 
-#### 🟢 Create
+### 🟢 Create
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Create Databricks Workspace | Resource Group | `Contributor` | Creates the workspace and the managed resource group (`databricks-rg-*`). No Databricks-specific Azure RBAC role exists for workspace creation. |
 | Deploy VNet-injected workspace | Resource Group + VNet | `Contributor` + `Network Contributor` | VNet injection requires delegation of the VNet subnets to Databricks. |
 
-#### 🟡 Edit / Update
+### 🟡 Edit / Update
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -39,13 +39,13 @@ Azure Databricks is a managed Apache Spark analytics platform. In a Data Landing
 | Modify workspace network settings | Workspace resource | `Contributor` | Some settings cannot be changed after creation. |
 | Enable Private Link (No Public IP / NPIP) | Workspace resource | `Contributor` + `Network Contributor` | |
 
-#### 🔴 Delete
+### 🔴 Delete
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Delete Databricks Workspace | Resource Group | `Contributor` | Also deletes the managed resource group. |
 
-#### ⚙️ Configure (Azure RBAC)
+### ⚙️ Configure (Azure RBAC)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -59,7 +59,7 @@ Azure Databricks is a managed Apache Spark analytics platform. In a Data Landing
 
 > Databricks RBAC is managed within the Databricks workspace. The following are the primary Databricks permission levels:
 
-#### Cluster Permissions
+### Cluster Permissions
 
 | Permission | Can Do |
 |---|---|
@@ -67,7 +67,7 @@ Azure Databricks is a managed Apache Spark analytics platform. In a Data Landing
 | `Can Restart` | Start and restart an existing cluster |
 | `Can Attach To` | Attach notebooks and run code on the cluster |
 
-#### Notebook Permissions
+### Notebook Permissions
 
 | Permission | Can Do |
 |---|---|
@@ -76,7 +76,7 @@ Azure Databricks is a managed Apache Spark analytics platform. In a Data Landing
 | `Can Edit` | Read and edit the notebook |
 | `Can Read` | Read only |
 
-#### Job Permissions
+### Job Permissions
 
 | Permission | Can Do |
 |---|---|
@@ -84,7 +84,7 @@ Azure Databricks is a managed Apache Spark analytics platform. In a Data Landing
 | `Can Manage Run` | Trigger and cancel job runs; view run results |
 | `Can View` | View job definition and run results |
 
-#### SQL Warehouse Permissions
+### SQL Warehouse Permissions
 
 | Permission | Can Do |
 |---|---|
@@ -92,7 +92,7 @@ Azure Databricks is a managed Apache Spark analytics platform. In a Data Landing
 | `Can Monitor` | View warehouse metrics and queries |
 | `Can Use` | Execute queries against the warehouse |
 
-#### Unity Catalog (Metastore) — Recommended for Production
+### Unity Catalog (Metastore) — Recommended for Production
 
 | Unity Catalog Privilege | Scope | Description |
 |---|---|---|

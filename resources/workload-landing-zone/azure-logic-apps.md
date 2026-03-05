@@ -22,7 +22,7 @@ Azure Logic Apps is a cloud-based integration platform for building automated wo
 
 ### 🟢 Create
 
-#### Consumption
+### Consumption
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -30,7 +30,7 @@ Azure Logic Apps is a cloud-based integration platform for building automated wo
 | Create Integration Account | Resource Group | `Logic App Contributor` | Required for B2B, XML, flat-file processing. |
 | Create Integration Service Environment (ISE) | Resource Group | `Contributor` | ISE is deprecated — use Standard with VNet integration instead. |
 
-#### Standard
+### Standard
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -39,7 +39,7 @@ Azure Logic Apps is a cloud-based integration platform for building automated wo
 
 ### 🟡 Edit / Update
 
-#### Consumption
+### Consumption
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -47,7 +47,7 @@ Azure Logic Apps is a cloud-based integration platform for building automated wo
 | Update API connections | Logic App + Connection | `Logic App Contributor` + `API Connection Contributor` | API connections are separate `Microsoft.Web/connections` resources. |
 | Modify trigger settings | Logic App | `Logic App Contributor` | |
 
-#### Standard
+### Standard
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|

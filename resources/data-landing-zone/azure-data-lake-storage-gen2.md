@@ -24,14 +24,14 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) combines the scalability of Azure Blob 
 
 ### Management Plane (Storage Account)
 
-#### 🟢 Create
+### 🟢 Create
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Create ADLS Gen2 storage account | Resource Group | `Storage Account Contributor` | Enable `isHnsEnabled: true` at creation — **cannot be changed post-creation**. |
 | Create a filesystem (container) | Storage Account | `Storage Blob Data Owner` | Only `Owner` can set ACLs on newly created filesystems. |
 
-#### 🟡 Edit / Update
+### 🟡 Edit / Update
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -39,7 +39,7 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) combines the scalability of Azure Blob 
 | Configure lifecycle management | Storage Account | `Storage Account Contributor` | |
 | Rotate storage keys | Storage Account | `Storage Account Key Operator Service Role` | |
 
-#### 🔴 Delete
+### 🔴 Delete
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -49,7 +49,7 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) combines the scalability of Azure Blob 
 
 ### Data Plane — ADLS Gen2 (HNS)
 
-#### 🟢 Create (Data)
+### 🟢 Create (Data)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -57,7 +57,7 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) combines the scalability of Azure Blob 
 | Upload file | Directory | `Storage Blob Data Contributor` + POSIX write+execute on directory | |
 | Set ACLs on directory/file | Directory or file | `Storage Blob Data Owner` | **Only `Owner` can set/change POSIX ACLs.** Contributor cannot. |
 
-#### 🟡 Edit / Update (Data)
+### 🟡 Edit / Update (Data)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -66,7 +66,7 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) combines the scalability of Azure Blob 
 | Update file metadata | File | `Storage Blob Data Contributor` + POSIX write | |
 | Modify POSIX ACLs | File or Directory | `Storage Blob Data Owner` | Requires Owner role; Contributor cannot modify ACLs. |
 
-#### 🔴 Delete (Data)
+### 🔴 Delete (Data)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -75,7 +75,7 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) combines the scalability of Azure Blob 
 | Delete a directory (recursive) | Filesystem | `Storage Blob Data Owner` | Recursive delete requires Owner or explicit ACL grants throughout the tree. |
 | Delete a filesystem | Storage Account | `Storage Blob Data Owner` | |
 
-#### ⚙️ Configure (Data)
+### ⚙️ Configure (Data)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|

@@ -24,20 +24,20 @@ Microsoft Purview (formerly Azure Purview) provides unified data governance, cat
 
 ### Azure RBAC — Account Management
 
-#### 🟢 Create
+### 🟢 Create
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Create Purview Account | Resource Group | `Contributor` | No Purview-specific management-plane create role. |
 | Configure Private Endpoint for Purview | Account + VNet | `Contributor` + `Network Contributor` | Private endpoints for portal, account, and ingestion. |
 
-#### 🟡 Edit / Update
+### 🟡 Edit / Update
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Modify Purview account settings | Account | `Contributor` | |
 
-#### 🔴 Delete
+### 🔴 Delete
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -49,7 +49,7 @@ Microsoft Purview (formerly Azure Purview) provides unified data governance, cat
 
 > Purview data plane roles are assigned within the Purview governance portal, organized by **Collection** (hierarchical namespace). Assign at the most specific collection scope possible.
 
-#### 🟢 Create (Catalog & Scanning)
+### 🟢 Create (Catalog & Scanning)
 
 | Operation | Collection Scope | Purview Role | Notes |
 |---|---|---|---|
@@ -59,7 +59,7 @@ Microsoft Purview (formerly Azure Purview) provides unified data governance, cat
 | Create business glossary terms | Root collection | `Data Curator` | |
 | Create collections and sub-collections | Collection | `Collection Admin` | Collection admins manage the hierarchy and role assignments within their collection. |
 
-#### 🟡 Edit / Update (Catalog)
+### 🟡 Edit / Update (Catalog)
 
 | Operation | Collection Scope | Purview Role | Notes |
 |---|---|---|---|
@@ -68,7 +68,7 @@ Microsoft Purview (formerly Azure Purview) provides unified data governance, cat
 | Apply sensitivity labels | Collection | `Data Curator` + Microsoft 365 licensing | Sensitivity labels require Purview Information Protection license. |
 | Edit glossary terms | Collection | `Data Curator` | |
 
-#### 🔴 Delete (Catalog)
+### 🔴 Delete (Catalog)
 
 | Operation | Collection Scope | Purview Role | Notes |
 |---|---|---|---|
@@ -76,7 +76,7 @@ Microsoft Purview (formerly Azure Purview) provides unified data governance, cat
 | Delete a data source registration | Root collection | `Data Source Administrator` | Also removes associated assets. |
 | Delete a collection | Collection | `Collection Admin` | |
 
-#### ⚙️ Configure
+### ⚙️ Configure
 
 | Operation | Collection Scope | Purview Role | Notes |
 |---|---|---|---|

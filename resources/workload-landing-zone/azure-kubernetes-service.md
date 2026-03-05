@@ -24,7 +24,7 @@ Azure Kubernetes Service (AKS) is a managed Kubernetes cluster service. It abstr
 
 ### Azure RBAC — Cluster Infrastructure
 
-#### 🟢 Create
+### 🟢 Create
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -32,7 +32,7 @@ Azure Kubernetes Service (AKS) is a managed Kubernetes cluster service. It abstr
 | Create node pool | AKS cluster | `Azure Kubernetes Service Contributor Role` | |
 | Attach ACR to AKS | AKS + ACR | `Azure Kubernetes Service Contributor Role` + `User Access Administrator` on ACR | Attaching grants `AcrPull` to the kubelet managed identity. |
 
-#### 🟡 Edit / Update
+### 🟡 Edit / Update
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -43,14 +43,14 @@ Azure Kubernetes Service (AKS) is a managed Kubernetes cluster service. It abstr
 | Modify network settings | AKS cluster | `Azure Kubernetes Service Contributor Role` | Some network settings cannot be changed after creation. |
 | Enable cluster autoscaler | AKS cluster | `Azure Kubernetes Service Contributor Role` | |
 
-#### 🔴 Delete
+### 🔴 Delete
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Delete AKS cluster | Resource Group | `Azure Kubernetes Service Contributor Role` | Also deletes the `MC_*` node resource group. |
 | Delete a node pool | AKS cluster | `Azure Kubernetes Service Contributor Role` | System node pool cannot be deleted while user node pools exist. |
 
-#### ⚙️ Configure (Infrastructure)
+### ⚙️ Configure (Infrastructure)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -66,7 +66,7 @@ Azure Kubernetes Service (AKS) is a managed Kubernetes cluster service. It abstr
 
 > Kubernetes RBAC roles are assigned within the cluster using `kubectl` or Azure RBAC (when Azure RBAC for Kubernetes is enabled). The table below covers **Azure RBAC-based Kubernetes roles** (requires `EnableAzureRBAC` feature on cluster).
 
-#### ⚙️ Configure (Workloads)
+### ⚙️ Configure (Workloads)
 
 | Operation | Kubernetes Scope | Least-Privileged Role | Notes |
 |---|---|---|---|

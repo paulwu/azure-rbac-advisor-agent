@@ -88,7 +88,7 @@ Azure Key Vault provides centralized secrets management, key management, and cer
 
 ## Notes / Considerations
 
-- **Never use `Key Vault Administrator`** for application identities — assign the narrowest data-plane role (`Secrets User`, `Crypto User`, etc.).
+- **Never use `Key Vault Administrator`** for application identities — assign the narrowest data-plane role (`Key Vault Secrets User`, `Key Vault Crypto User`, etc.).
 - **Managed Identities** are the preferred way for Azure services to authenticate to Key Vault — avoids credential leakage.
 - **Soft-delete** and **Purge Protection** should be enabled on all platform Key Vaults. Once Purge Protection is enabled, it cannot be disabled.
 - **Private Endpoints** should be used in Platform LZs to block public access; configure network rules to deny public access.

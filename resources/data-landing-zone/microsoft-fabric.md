@@ -89,11 +89,21 @@ Microsoft Fabric is a unified analytics platform that combines data engineering,
 | Azure SQL Database | `SQL DB Contributor` + SQL contained user | External data source for warehouses and lakehouses |
 | Azure Event Hubs | `Azure Event Hubs Data Receiver` | Real-time data ingestion via Eventstreams |
 
+## Runtime Dependencies
+
+| Dependency | Resource Type | Purpose | Required / Optional |
+|---|---|---|---|
+| [Azure Data Lake Storage Gen2](./azure-data-lake-storage-gen2.md) | `Microsoft.Storage/storageAccounts` | External data accessed via OneLake shortcuts; the Fabric workspace identity requires `Storage Blob Data Reader` or `Storage Blob Data Contributor` on the target ADLS Gen2 account. | Optional |
+| [Azure Event Hubs](./azure-event-hubs.md) | `Microsoft.EventHub/namespaces` | Real-time data ingestion for Fabric Eventstreams; the Fabric workspace identity requires `Azure Event Hubs Data Receiver` on the Event Hub namespace. | Optional |
+| [Azure Key Vault](../platform-landing-zone/azure-key-vault.md) | `Microsoft.KeyVault/vaults` | Stores connection secrets for external data sources; the Fabric workspace identity requires `Key Vault Secrets User` on the vault. | Optional |
+| [Azure SQL Database](../workload-landing-zone/azure-sql-database.md) | `Microsoft.Sql/servers/databases` | External data source for Fabric warehouses and lakehouses; Fabric managed identity must be added as a SQL contained database user. | Optional |
+| [Log Analytics Workspace](../platform-landing-zone/log-analytics-workspace.md) | `Microsoft.OperationalInsights/workspaces` | Receives Fabric capacity diagnostic logs via Diagnostic Settings for monitoring and troubleshooting. | Optional (strongly recommended) |
+
 ## Notes / Considerations
 
 - **Fabric workspace permissions are separate from Azure RBAC** — having `Contributor` on the Azure capacity does not grant access to workspace items. Workspace roles must be assigned within the Fabric portal.
 - **Fabric Admin role** is a tenant-level Microsoft 365 admin role (formerly Power BI Admin). It is distinct from both Azure RBAC and workspace-level roles and grants administration of all Fabric capacities and workspaces within the tenant.
-- **OneLake** is the unified storage layer for all Fabric workspaces. OneLake shortcuts to external ADLS Gen2 require the Fabric workspace identity to have appropriate `Storage Blob Data *` roles on the target storage account.
+- **OneLake** is the unified storage layer for all Fabric workspaces. OneLake shortcuts to external ADLS Gen2 require the Fabric workspace identity to have `Storage Blob Data Reader` or `Storage Blob Data Contributor` roles on the target storage account.
 - Use **Managed Identities** (workspace identity) for connections to external Azure resources instead of credentials or shared keys.
 - **Capacity pausing** stops all compute and makes workspaces read-only — data in OneLake is not affected.
 - Fabric inherits **Microsoft Purview** integration for data governance and lineage tracking when Purview is configured in the same tenant.

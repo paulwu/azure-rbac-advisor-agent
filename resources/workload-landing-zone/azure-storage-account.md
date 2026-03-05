@@ -18,6 +18,10 @@ Azure Storage Account is a multi-service storage platform providing Blob, File, 
 
 ---
 
+## Least-Privilege RBAC Reference
+
+> Azure Storage separates **management plane** (account provisioning and configuration via Azure RBAC) from **data plane** (data access within each storage service). Management roles like `Storage Account Contributor` do NOT grant data access. Data plane roles like `Storage Blob Data Contributor` do NOT grant account management.
+
 ## Management Plane — Storage Account
 
 ### 🟢 Create (Account)

@@ -24,7 +24,7 @@ Azure Synapse Analytics is a unified analytics platform combining big data and d
 
 ### Azure RBAC — Management Plane
 
-#### 🟢 Create
+### 🟢 Create
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -32,7 +32,7 @@ Azure Synapse Analytics is a unified analytics platform combining big data and d
 | Create Dedicated SQL Pool | Workspace | `Contributor` | `Microsoft.Synapse/workspaces/sqlPools/write`. |
 | Create Apache Spark Pool | Workspace | `Contributor` | `Microsoft.Synapse/workspaces/bigDataPools/write`. |
 
-#### 🟡 Edit / Update
+### 🟡 Edit / Update
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -40,14 +40,14 @@ Azure Synapse Analytics is a unified analytics platform combining big data and d
 | Scale Dedicated SQL Pool (DWUs) | SQL Pool | `Contributor` | Pause/resume requires same role. |
 | Modify Spark Pool auto-scaling | Spark Pool | `Contributor` | |
 
-#### 🔴 Delete
+### 🔴 Delete
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Delete SQL Pool / Spark Pool | Workspace | `Contributor` | |
 | Delete Synapse Workspace | Resource Group | `Contributor` | |
 
-#### ⚙️ Configure (Management Plane)
+### ⚙️ Configure (Management Plane)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -61,7 +61,7 @@ Azure Synapse Analytics is a unified analytics platform combining big data and d
 
 > Synapse RBAC is managed within Synapse Studio or via API. Roles are assigned at workspace, Synapse pool, or integration runtime level.
 
-#### ⚙️ Configure (Synapse RBAC)
+### ⚙️ Configure (Synapse RBAC)
 
 | Operation | Synapse RBAC Role | Scope | Notes |
 |---|---|---|---|

@@ -24,14 +24,14 @@ Azure Data Explorer (ADX / Kusto) is a fast, fully managed analytics service for
 
 ### Azure RBAC — Cluster Management
 
-#### 🟢 Create
+### 🟢 Create
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Create ADX Cluster | Resource Group | `Contributor` | No ADX-specific management-plane role. |
 | Create a Database | Cluster | `Contributor` | `Microsoft.Kusto/clusters/databases/write`. |
 
-#### 🟡 Edit / Update
+### 🟡 Edit / Update
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -40,14 +40,14 @@ Azure Data Explorer (ADX / Kusto) is a fast, fully managed analytics service for
 | Configure streaming ingestion | Cluster | `Contributor` | |
 | Enable Purview integration | Cluster | `Contributor` | |
 
-#### 🔴 Delete
+### 🔴 Delete
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Delete Database | Cluster | `Contributor` | All data in the database is deleted. |
 | Delete Cluster | Resource Group | `Contributor` | |
 
-#### ⚙️ Configure (Azure RBAC)
+### ⚙️ Configure (Azure RBAC)
 
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
@@ -61,7 +61,7 @@ Azure Data Explorer (ADX / Kusto) is a fast, fully managed analytics service for
 
 > Kusto RBAC roles are assigned within ADX using `.add` commands or the Azure portal. Principal types: Entra ID users, groups, or service principals.
 
-#### Database-Level Roles
+### Database-Level Roles
 
 | Kusto Role | Permissions |
 |---|---|
@@ -74,7 +74,7 @@ Azure Data Explorer (ADX / Kusto) is a fast, fully managed analytics service for
 | `Monitor` | View database metadata and diagnostics |
 | `UnrestrictedViewer` | Query all tables, bypassing row-level security policies |
 
-#### Table-Level Roles
+### Table-Level Roles
 
 | Kusto Role | Permissions |
 |---|---|
@@ -82,7 +82,7 @@ Azure Data Explorer (ADX / Kusto) is a fast, fully managed analytics service for
 | `Ingestor` | Ingest data into the table |
 | `Viewer` | Query the table |
 
-#### Operations by Role
+### Operations by Role
 
 | Operation | Minimum Kusto Role |
 |---|---|
