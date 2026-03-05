@@ -79,5 +79,6 @@ Azure Application Gateway is a Layer 7 (HTTP/S) load balancer with SSL terminati
 ## Related Resources
 
 - [Azure Load Balancer](./azure-load-balancer.md) — L4 alternative for non-HTTP traffic
+- [Azure Front Door](../platform-landing-zone/azure-front-door.md) — Global L7 alternative for multi-region workloads
 - [Azure Key Vault](./azure-key-vault.md) — TLS certificate storage
 - [Spoke Virtual Network](./spoke-virtual-network.md) — Dedicated App Gateway subnet

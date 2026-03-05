@@ -83,4 +83,6 @@ Microsoft Defender for Cloud provides unified security management and advanced t
 
 - [Azure Policy](./azure-policy.md) — Defender for Cloud uses policy initiatives for security recommendations
 - [Log Analytics Workspace](./log-analytics-workspace.md) — Security data is sent to the workspace
+- [Microsoft Sentinel](./microsoft-sentinel.md) — Security alerts forwarded to Sentinel via data connector
+- [Azure Arc](./azure-arc.md) — Extends Defender protection to hybrid resources
 - [Azure Monitor](./azure-monitor.md) — Security alerts surface in Monitor

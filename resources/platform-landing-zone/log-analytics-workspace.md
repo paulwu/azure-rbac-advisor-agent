@@ -85,4 +85,5 @@ Log Analytics supports two access control modes:
 
 - [Azure Monitor](./azure-monitor.md) — Uses workspace as primary log store
 - [Microsoft Defender for Cloud](./microsoft-defender-for-cloud.md) — Sends security data to workspace
+- [Microsoft Sentinel](./microsoft-sentinel.md) — SIEM/SOAR deployed on top of workspace
 - [Azure Automation Account](./azure-automation-account.md) — Can be linked for Update Management / Change Tracking

@@ -117,6 +117,7 @@ Azure API Management (APIM) is a hybrid, multi-cloud management platform for API
 ## Related Resources
 
 - [Azure Key Vault](./azure-key-vault.md) — Named Values and TLS certificate storage
+- [Azure Front Door](./azure-front-door.md) — Global entry point; APIM is a common Front Door origin
 - [Hub Virtual Network](./hub-virtual-network.md) — VNet integration for internal-mode APIM
 - [Private DNS Zones](./private-dns-zones.md) — `privatelink.azure-api.net` for private APIM access
 - [Azure Monitor](./azure-monitor.md) — API analytics and diagnostics

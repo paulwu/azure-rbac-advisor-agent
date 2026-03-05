@@ -92,6 +92,8 @@ Azure Virtual Machines provide IaaS compute in the workload landing zone. VMs ar
 ## Related Resources
 
 - [Azure SSH Key](./azure-ssh-key.md) — SSH public key resources for Linux VM provisioning
+- [Virtual Machine Scale Sets](./virtual-machine-scale-sets.md) — Auto-scaling VM groups
+- [Azure Managed Disks](./azure-managed-disks.md) — OS and data disk management
 - [Network Security Groups](./network-security-groups.md) — Applied to the VM's NIC and subnet
 - [Azure Bastion](../platform-landing-zone/azure-bastion.md) — Secure VM access without public IPs
 - [Azure Key Vault](./azure-key-vault.md) — Disk encryption key storage

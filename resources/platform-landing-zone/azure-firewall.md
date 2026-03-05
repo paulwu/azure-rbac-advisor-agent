@@ -81,5 +81,6 @@ Azure Firewall is a managed, cloud-native network security service deployed in t
 ## Related Resources
 
 - [Hub Virtual Network](./hub-virtual-network.md) — Firewall is deployed in the hub
+- [Azure Front Door](./azure-front-door.md) — Global entry point; Front Door can route through Firewall
 - [VPN / ExpressRoute Gateway](./vpn-expressroute-gateway.md) — On-premises traffic routed through firewall
 - [Log Analytics Workspace](./log-analytics-workspace.md) — Firewall diagnostic logs destination

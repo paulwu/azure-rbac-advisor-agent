@@ -98,4 +98,6 @@ Azure Event Hubs is a big data streaming platform and event ingestion service. I
 - [Azure Data Lake Storage Gen2](./azure-data-lake-storage-gen2.md) — Event Hubs Capture destination
 - [Azure Stream Analytics](./azure-stream-analytics.md) — Common Event Hubs consumer
 - [Azure Synapse Analytics](./azure-synapse-analytics.md) — Synapse Link for real-time analytics
+- [Azure Event Grid](./azure-event-grid.md) — Event-driven routing companion
+- [Azure IoT Hub](./azure-iot-hub.md) — IoT telemetry routed to Event Hubs
 - [Microsoft Fabric](./microsoft-fabric.md) — Real-time data ingestion via Fabric Eventstreams
