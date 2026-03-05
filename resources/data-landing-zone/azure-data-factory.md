@@ -101,3 +101,4 @@ ADF uses its system-assigned or user-assigned managed identity to access data so
 - [Azure Data Lake Storage Gen2](./azure-data-lake-storage-gen2.md) — Primary data store for ADF pipelines
 - [Azure Synapse Analytics](./azure-synapse-analytics.md) — Often used with ADF for analytics
 - [Azure Key Vault](../workload-landing-zone/azure-key-vault.md) — Credential storage for Linked Services
+- [Microsoft Fabric](./microsoft-fabric.md) — Data Factory pipelines available natively as Fabric Pipelines

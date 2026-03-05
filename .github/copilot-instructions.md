@@ -271,17 +271,36 @@ Use relative paths. Cross-landing-zone links must use `../landing-zone-dir/file.
 
 ---
 
-## Azure RBAC Advisor Custom Agent
+## Custom Agents
 
-A Copilot custom agent is defined in `.github/agents/azure-rbac-advisor.agent.md`. It is scoped exclusively to answering Azure RBAC questions using the `resources/` library as its knowledge base.
+Two Copilot custom agents are defined in `.github/agents/`:
 
-Key constraints that apply to the agent (and should not be violated when working in this repo):
+### Azure RBAC Advisor (`azure-rbac-advisor.agent.md`)
+
+**Purpose:** Answers Azure RBAC questions using the `resources/` library as its knowledge base.
+
+Key constraints:
 
 - **Read `resources/` files; never modify them.** The agent reads resource files as a reference library — it must not write to or edit any file under `resources/`.
 - **Write output only to `log/` and `answer/`.** `log/` is gitignored; `answer/` is tracked in git. These directories may not exist after a fresh clone; run `make setup` to create them.
 - **Never invent role names.** The agent cites roles verbatim from resource files; Copilot authoring assistance must do the same.
 
 When a user invokes the agent (via `/agent` in the CLI or the agent dropdown in VS Code Copilot Chat), it logs every prompt to `log/copilot-log_YYYY-MM-DD_HH-MM-SS PST.md` and saves answers to `answer/answer_YYYY-MM-DD_HH-MM-SS PST.md`. If these directories are missing, the agent will fail to write — create them with the setup command above.
+
+### Azure RBAC Knowledge Author (`azure-rbac-knowledge-author.agent.md`)
+
+**Purpose:** Creates new resource RBAC reference files and validates existing ones.
+
+Two modes of operation:
+
+- **Author mode** — Creates new resource files following the mandatory 7-section structure. Fetches role data from official Microsoft documentation and verifies every role name against the [Azure built-in roles list](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles) before writing.
+- **Validate mode** — Checks existing files for structural completeness (sections, table format, heading levels) and role name accuracy. Produces a report with errors and warnings, and can auto-fix issues on request.
+
+Key constraints:
+
+- **Writes to `resources/` only** — the author agent creates and edits resource files.
+- **Never skips role verification** — every role name is checked via web fetch before inclusion.
+- **Self-validates** after authoring — runs the full validation pass on its own output before confirming done.
 
 ---
 

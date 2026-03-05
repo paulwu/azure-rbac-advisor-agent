@@ -138,3 +138,4 @@ The Purview account's managed identity needs read access to scan data sources:
 - [Azure Data Lake Storage Gen2](./azure-data-lake-storage-gen2.md) — Primary scan target
 - [Azure Synapse Analytics](./azure-synapse-analytics.md) — Synapse catalog integration
 - [Azure Databricks](./azure-databricks.md) — Unity Catalog lineage integration
+- [Microsoft Fabric](./microsoft-fabric.md) — Data governance and lineage for Fabric workspaces

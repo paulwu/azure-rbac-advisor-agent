@@ -283,22 +283,28 @@ Use `glob` with pattern `resources/**/*.md` to discover all available resource f
 
 ```
 resources/
-├── platform-landing-zone/    (12 resources: management-groups, azure-policy, log-analytics-workspace,
+├── platform-landing-zone/    (16 resources: management-groups, azure-policy, log-analytics-workspace,
 │                              azure-monitor, microsoft-defender-for-cloud, azure-key-vault,
 │                              hub-virtual-network, azure-firewall, vpn-expressroute-gateway,
-│                              azure-bastion, private-dns-zones, azure-automation-account)
-├── workload-landing-zone/    (11 resources: spoke-virtual-network, network-security-groups,
-│                              virtual-machines, app-service, azure-sql-database,
+│                              azure-bastion, private-dns-zones, azure-automation-account,
+│                              api-management, managed-identity, recovery-services-vault,
+│                              storage-sync-service)
+├── workload-landing-zone/    (17 resources: spoke-virtual-network, network-security-groups,
+│                              virtual-machines, app-service, app-service-plan, azure-sql-database,
 │                              azure-storage-account, azure-key-vault, azure-load-balancer,
 │                              application-gateway, azure-container-registry,
-│                              azure-kubernetes-service)
+│                              azure-kubernetes-service, azure-functions, azure-logic-apps,
+│                              azure-container-apps, azure-container-apps-environment,
+│                              azure-ssh-key)
 ├── data-landing-zone/        (9 resources: azure-data-factory, azure-synapse-analytics,
 │                              azure-data-lake-storage-gen2, azure-databricks, azure-event-hubs,
 │                              azure-cosmos-db, azure-stream-analytics, microsoft-purview,
 │                              azure-data-explorer)
-└── ai-landing-zone/          (7 resources: azure-machine-learning, azure-openai,
+└── ai-landing-zone/          (10 resources: azure-machine-learning, azure-openai,
                                azure-ai-services, azure-ai-search, azure-bot-service,
-                               azure-applied-ai-services, azure-ai-foundry)
+                               azure-applied-ai-services, azure-ai-foundry,
+                               azure-ai-document-intelligence, azure-ai-content-understanding,
+                               grounding-with-bing-search)
 ```
 
 For **Azure Storage**, always read `resources/workload-landing-zone/azure-storage-account.md` — it contains granular Blob, File, Queue, and Table sub-sections.

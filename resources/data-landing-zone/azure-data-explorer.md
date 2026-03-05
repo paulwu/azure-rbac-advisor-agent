@@ -118,3 +118,4 @@ Azure Data Explorer (ADX / Kusto) is a fast, fully managed analytics service for
 - [Azure Data Lake Storage Gen2](./azure-data-lake-storage-gen2.md) — External table and export target
 - [Azure Monitor](../platform-landing-zone/azure-monitor.md) — ADX is the backend for Azure Monitor Logs (Log Analytics) at scale
 - [Microsoft Purview](./microsoft-purview.md) — Catalog integration for ADX databases
+- [Microsoft Fabric](./microsoft-fabric.md) — Fabric Real-Time Intelligence is built on Kusto (ADX engine)

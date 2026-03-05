@@ -123,3 +123,4 @@ Azure Synapse Analytics is a unified analytics platform combining big data and d
 - [Azure Data Lake Storage Gen2](./azure-data-lake-storage-gen2.md) — Primary storage for Synapse
 - [Azure Data Factory](./azure-data-factory.md) — Often used alongside Synapse for orchestration
 - [Microsoft Purview](./microsoft-purview.md) — Data catalog for Synapse assets
+- [Microsoft Fabric](./microsoft-fabric.md) — Successor/complement for unified analytics workloads

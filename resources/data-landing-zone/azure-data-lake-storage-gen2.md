@@ -137,3 +137,4 @@ Azure Data Lake Storage Gen2 (ADLS Gen2) combines the scalability of Azure Blob 
 - [Azure Synapse Analytics](./azure-synapse-analytics.md) — Primary analytics engine over ADLS Gen2
 - [Azure Databricks](./azure-databricks.md) — Spark processing on ADLS Gen2
 - [Microsoft Purview](./microsoft-purview.md) — Data catalog scanning ADLS Gen2
+- [Microsoft Fabric](./microsoft-fabric.md) — Unified analytics platform accessing ADLS Gen2 via OneLake shortcuts
