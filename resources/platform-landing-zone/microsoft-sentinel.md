@@ -86,4 +86,5 @@ Microsoft Sentinel is a cloud-native SIEM and SOAR solution built on top of a Lo
 - [Log Analytics Workspace](./log-analytics-workspace.md) — Underlying data store for all Sentinel data
 - [Azure Monitor](./azure-monitor.md) — Alert rules and workbook infrastructure
 - [Microsoft Defender for Cloud](./microsoft-defender-for-cloud.md) — Security alerts forwarded to Sentinel via data connector
+- [Azure SRE Agent](./azure-sre-agent.md) — Security incidents can trigger SRE Agent remediation
 - [Azure Key Vault](./azure-key-vault.md) — Playbook secrets and credential storage

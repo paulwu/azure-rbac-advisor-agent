@@ -47,7 +47,7 @@ Every resource file documents the least-privileged built-in role needed for **Cr
 .
 ├── resources/
 │   ├── README.md                        # Library overview and RBAC principles
-│   ├── platform-landing-zone/           # 22 resources (shared services, governance)
+│   ├── platform-landing-zone/           # 23 resources (shared services, governance)
 │   ├── workload-landing-zone/           # 23 resources (application workloads)
 │   ├── data-landing-zone/               # 14 resources (data platforms and analytics)
 │   └── ai-landing-zone/                 # 11 resources (AI/ML services)
@@ -66,7 +66,7 @@ Every resource file documents the least-privileged built-in role needed for **Cr
 
 | Landing Zone | Count | Resources Covered |
 |---|---|---|
-| **Platform** | 22 | Management Groups, Azure Policy, Log Analytics Workspace, Azure Monitor, Microsoft Defender for Cloud, Microsoft Sentinel, Azure Key Vault, Hub Virtual Network, Azure Firewall, Azure Front Door, Azure WAF Policy, Azure DDoS Protection Plan, Traffic Manager, VPN/ExpressRoute Gateway, Azure Bastion, Azure Arc, Private DNS Zones, Azure Automation Account, API Management, Managed Identity, Recovery Services Vault, Storage Sync Service |
+| **Platform** | 23 | Management Groups, Azure Policy, Log Analytics Workspace, Azure Monitor, Microsoft Defender for Cloud, Microsoft Sentinel, Azure Key Vault, Hub Virtual Network, Azure Firewall, Azure Front Door, Azure WAF Policy, Azure DDoS Protection Plan, Traffic Manager, VPN/ExpressRoute Gateway, Azure Bastion, Azure Arc, Private DNS Zones, Azure Automation Account, API Management, Managed Identity, Recovery Services Vault, Storage Sync Service, Azure SRE Agent *(preview)* |
 | **Workload** | 23 | Spoke Virtual Network, Network Security Groups, Virtual Machines, Virtual Machine Scale Sets, Azure Managed Disks, Azure Virtual Desktop, App Service, App Service Plan, Azure SQL Database, Azure Database for PostgreSQL, Azure Storage Account *(with Blob/File/Queue/Table breakdowns)*, Azure Cache for Redis, Azure Key Vault, Azure Load Balancer, Application Gateway, Azure Container Registry, Azure Kubernetes Service, Azure Container Apps, Azure Container Apps Environment, Azure Functions, Azure Logic Apps, Azure Managed Grafana, Azure SSH Key |
 | **Data** | 14 | Azure Data Factory, Azure Synapse Analytics, Azure Data Lake Storage Gen2, Azure Databricks, Azure Event Hubs, Azure Event Grid, Azure IoT Hub, Azure Cosmos DB, Azure Stream Analytics, Azure HDInsight, Azure Notification Hubs, Microsoft Purview, Microsoft Fabric, Azure Data Explorer |
 | **AI** | 11 | Azure Machine Learning, Azure OpenAI, Azure AI Services, Azure AI Search, Azure Bot Service, Azure Applied AI Services, Azure AI Foundry, Azure AI Document Intelligence, Azure AI Content Understanding, Grounding with Bing Search, Foundry IQ |
@@ -129,7 +129,7 @@ The **Azure RBAC Advisor** is a GitHub Copilot custom agent defined in `.github/
 
 ### Recommended Model
 
-For best results, select **Claude Opus 4.6 (1M context)(Internal only)** when running the Azure RBAC Advisor. Its large context window allows the agent to load the full `resources/` library in a single pass, ensuring role recommendations are grounded across all 70 resource files simultaneously — particularly important for complex cross-resource prompts covering many services at once (e.g., a full Agentic AI Workload with 16 resources).
+For best results, select **Claude Opus 4.6 (1M context)(Internal only)** when running the Azure RBAC Advisor. Its large context window allows the agent to load the full `resources/` library in a single pass, ensuring role recommendations are grounded across all 71 resource files simultaneously — particularly important for complex cross-resource prompts covering many services at once (e.g., a full Agentic AI Workload with 16 resources).
 
 **To select the model in the GitHub Copilot CLI:**
 

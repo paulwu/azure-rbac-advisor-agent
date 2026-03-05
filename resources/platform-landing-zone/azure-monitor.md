@@ -80,3 +80,4 @@ Azure Monitor collects, analyzes, and acts on telemetry from Azure resources. In
 - [Log Analytics Workspace](./log-analytics-workspace.md) — Primary destination for diagnostic logs
 - [Microsoft Defender for Cloud](./microsoft-defender-for-cloud.md) — Security alerts appear in Monitor
 - [Azure Automation Account](./azure-automation-account.md) — Runbook actions triggered by Action Groups
+- [Azure SRE Agent](./azure-sre-agent.md) — AI-powered autonomous monitoring and remediation
