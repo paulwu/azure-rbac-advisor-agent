@@ -1,6 +1,11 @@
-# Azure RBAC Least-Privilege Reference Library
+# Azure RBAC Advisor Agent
 
-A structured reference library of Azure Role-Based Access Control (RBAC) least-privilege role assignments, organized by Azure Landing Zone archetype. The repository also includes a **GitHub Copilot custom agent** — the Azure RBAC Advisor — that lets you query this library conversationally.
+A **GitHub Copilot custom agent** for generating least-privilege roles for specified workloads organized by Azure Landing Zone archetype. 
+The project also serves as a repository for RBAC roles for common Azure resources. 
+
+# Azure RBAC Knowledge Author
+
+The repository also includes a second custom agent — the **Azure RBAC Knowledge Author** — for creating new resource RBAC reference files and validating existing ones. This agent generates the grounding knowledge that powers the Azure RBAC Advisor.
 
 ---
 
@@ -15,6 +20,10 @@ A structured reference library of Azure Role-Based Access Control (RBAC) least-p
   - [Sample Prompts](#sample-prompts)
   - [Full Workload Deployment Example](#full-workload-deployment-example)
   - [Guided Scoping Flow](#guided-scoping-flow)
+- [Using the Azure RBAC Knowledge Author](#using-the-azure-rbac-knowledge-author)
+  - [Author Mode](#author-mode)
+  - [Validate Mode](#validate-mode)
+  - [Knowledge Author Sample Prompts](#knowledge-author-sample-prompts)
 - [Test Use Cases](#test-use-cases)
 - [Authoritative Sources](#authoritative-sources)
 - [First-Time Setup](#first-time-setup)
@@ -38,14 +47,15 @@ Every resource file documents the least-privileged built-in role needed for **Cr
 .
 ├── resources/
 │   ├── README.md                        # Library overview and RBAC principles
-│   ├── platform-landing-zone/           # 16 resources (shared services, governance)
-│   ├── workload-landing-zone/           # 17 resources (application workloads)
-│   ├── data-landing-zone/               # 9 resources (data platforms and analytics)
+│   ├── platform-landing-zone/           # 22 resources (shared services, governance)
+│   ├── workload-landing-zone/           # 23 resources (application workloads)
+│   ├── data-landing-zone/               # 14 resources (data platforms and analytics)
 │   └── ai-landing-zone/                 # 11 resources (AI/ML services)
 ├── .github/
 │   ├── agents/
-│   │   └── azure-rbac-advisor.agent.md  # Copilot custom agent
-│   └── copilot-instructions.md          # Authoring rules for future contributions
+│   │   ├── azure-rbac-advisor.agent.md          # RBAC Advisor agent (query mode)
+│   │   └── azure-rbac-knowledge-author.agent.md # Knowledge Author agent (author + validate)
+│   └── copilot-instructions.md          # Authoring rules for all contributions
 ├── test/
 │   ├── use-case-01.md                   # CI/CD pipeline pushing images to ACR
 │   └── use-case-02.md                   # Agentic AI Workload (16 resources)
@@ -56,9 +66,9 @@ Every resource file documents the least-privileged built-in role needed for **Cr
 
 | Landing Zone | Count | Resources Covered |
 |---|---|---|
-| **Platform** | 16 | Management Groups, Azure Policy, Log Analytics Workspace, Azure Monitor, Microsoft Defender for Cloud, Azure Key Vault, Hub Virtual Network, Azure Firewall, VPN/ExpressRoute Gateway, Azure Bastion, Private DNS Zones, Azure Automation Account, API Management, Managed Identity, Recovery Services Vault, Storage Sync Service |
-| **Workload** | 17 | Spoke Virtual Network, Network Security Groups, Virtual Machines, App Service, App Service Plan, Azure SQL Database, Azure Storage Account *(with Blob/File/Queue/Table breakdowns)*, Azure Key Vault, Azure Load Balancer, Application Gateway, Azure Container Registry, Azure Kubernetes Service, Azure Container Apps, Azure Container Apps Environment, Azure Functions, Azure Logic Apps, Azure SSH Key |
-| **Data** | 9 | Azure Data Factory, Azure Synapse Analytics, Azure Data Lake Storage Gen2, Azure Databricks, Azure Event Hubs, Azure Cosmos DB, Azure Stream Analytics, Microsoft Purview, Azure Data Explorer |
+| **Platform** | 22 | Management Groups, Azure Policy, Log Analytics Workspace, Azure Monitor, Microsoft Defender for Cloud, Microsoft Sentinel, Azure Key Vault, Hub Virtual Network, Azure Firewall, Azure Front Door, Azure WAF Policy, Azure DDoS Protection Plan, Traffic Manager, VPN/ExpressRoute Gateway, Azure Bastion, Azure Arc, Private DNS Zones, Azure Automation Account, API Management, Managed Identity, Recovery Services Vault, Storage Sync Service |
+| **Workload** | 23 | Spoke Virtual Network, Network Security Groups, Virtual Machines, Virtual Machine Scale Sets, Azure Managed Disks, Azure Virtual Desktop, App Service, App Service Plan, Azure SQL Database, Azure Database for PostgreSQL, Azure Storage Account *(with Blob/File/Queue/Table breakdowns)*, Azure Cache for Redis, Azure Key Vault, Azure Load Balancer, Application Gateway, Azure Container Registry, Azure Kubernetes Service, Azure Container Apps, Azure Container Apps Environment, Azure Functions, Azure Logic Apps, Azure Managed Grafana, Azure SSH Key |
+| **Data** | 14 | Azure Data Factory, Azure Synapse Analytics, Azure Data Lake Storage Gen2, Azure Databricks, Azure Event Hubs, Azure Event Grid, Azure IoT Hub, Azure Cosmos DB, Azure Stream Analytics, Azure HDInsight, Azure Notification Hubs, Microsoft Purview, Microsoft Fabric, Azure Data Explorer |
 | **AI** | 11 | Azure Machine Learning, Azure OpenAI, Azure AI Services, Azure AI Search, Azure Bot Service, Azure Applied AI Services, Azure AI Foundry, Azure AI Document Intelligence, Azure AI Content Understanding, Grounding with Bing Search, Foundry IQ |
 
 ---
@@ -119,7 +129,7 @@ The **Azure RBAC Advisor** is a GitHub Copilot custom agent defined in `.github/
 
 ### Recommended Model
 
-For best results, select **Claude Opus 4.6 (1M context)(Internal only)** when running the Azure RBAC Advisor. Its large context window allows the agent to load the full `resources/` library in a single pass, ensuring role recommendations are grounded across all 53 resource files simultaneously — particularly important for complex cross-resource prompts covering many services at once (e.g., a full Agentic AI Workload with 16 resources).
+For best results, select **Claude Opus 4.6 (1M context)(Internal only)** when running the Azure RBAC Advisor. Its large context window allows the agent to load the full `resources/` library in a single pass, ensuring role recommendations are grounded across all 70 resource files simultaneously — particularly important for complex cross-resource prompts covering many services at once (e.g., a full Agentic AI Workload with 16 resources).
 
 **To select the model in the GitHub Copilot CLI:**
 
@@ -235,6 +245,60 @@ If your question is broad or outside RBAC scope, the agent will guide you with t
 
 ---
 
+## Using the Azure RBAC Knowledge Author
+
+The **Azure RBAC Knowledge Author** is a second Copilot custom agent defined in `.github/agents/azure-rbac-knowledge-author.agent.md`. It creates new resource RBAC reference files and validates existing ones in `resources/`. Unlike the Advisor (which is read-only), the Knowledge Author writes to and modifies files in `resources/`.
+
+### Author Mode
+
+Create a new resource file by telling the agent which resource to add. The agent will:
+
+1. Determine the correct landing zone and filename
+2. Research the resource using official Microsoft documentation
+3. Verify every role name against the [Azure built-in roles list](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles)
+4. Generate the file following the mandatory 7-section structure
+5. Update Related Resources links in existing files
+6. Self-validate the new file before confirming
+
+### Validate Mode
+
+Check existing files for structural compliance and role name accuracy. The agent performs:
+
+- **Structural checks** — all 7 mandatory sections present, correct heading levels (no H4+), no HTML, correct table column format
+- **Role name verification** — every backtick-quoted role name checked against the Azure built-in roles list
+- **Scope check** — flags `Subscription` scope where resource-level would suffice, flags `Owner`/`Contributor` where narrower roles exist
+
+Validate a single file, an entire landing zone, or the full library.
+
+### Knowledge Author Sample Prompts
+
+**Add a new resource:**
+```
+Add Azure Service Bus to data-landing-zone
+```
+
+**Validate a single file:**
+```
+Validate azure-key-vault.md for accuracy
+```
+
+**Batch validate a landing zone:**
+```
+Validate all files in ai-landing-zone
+```
+
+**Validate everything:**
+```
+Validate all resources
+```
+
+**Fix validation issues:**
+```
+Fix all issues found in the validation report
+```
+
+---
+
 ## Test Use Cases
 
 The `test/` folder contains reference use cases that validate agent output quality and demonstrate the range of questions the Azure RBAC Advisor can answer. Each file has two sections: the exact prompt used (`Section 1`) and the expected RBAC output (`Section 2`).
@@ -283,20 +347,24 @@ All RBAC role information in this library is drawn from official Microsoft docum
 
 ## First-Time Setup
 
-After cloning this repository, run the setup script to create the `log/` and `answer/` runtime directories used by the Azure RBAC Advisor agent:
+After cloning this repository, run the setup command to create the `log/` and `answer/` runtime directories used by the Azure RBAC Advisor agent:
 
 ```bash
-# Option 1 — shell script
-bash setup.sh
-
-# Option 2 — make
 make setup
 ```
 
-These directories are excluded from git (via `.gitignore`) but must exist locally for the agent to write prompt logs and answer files.
+`log/` is gitignored. `answer/` is tracked in git (answer files are committed so output quality can be compared over time). Both directories must exist locally for the Advisor agent to write prompt logs and answer files.
 
 ---
 
 ## Contributing
 
 When adding or modifying resource files, follow the authoring rules in [`.github/copilot-instructions.md`](.github/copilot-instructions.md). Every file must follow the mandatory 7-section structure with consistent RBAC table formatting and source citations.
+
+The recommended workflow for adding new resources is to use the **Azure RBAC Knowledge Author** agent, which automates file generation, role verification, cross-reference updates, and self-validation. To add a resource manually, ensure you:
+
+1. Place the file in the correct landing zone directory
+2. Follow the 7-section structure (Resource Metadata, Overview, Least-Privilege RBAC Reference with 🟢🟡🔴⚙️, Runtime Dependencies, Notes / Considerations, Related Resources)
+3. Verify every role name against the [Azure built-in roles list](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles)
+4. Update Related Resources links in connected files
+5. Run the Knowledge Author in validate mode to check your work
