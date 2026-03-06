@@ -4,6 +4,23 @@ These instructions govern how GitHub Copilot should create, modify, and extend f
 
 ---
 
+## Quick Reference
+
+```bash
+# First-time setup — create log/ and answer/ runtime directories
+make setup
+
+# Run a single test (via the Azure RBAC Test Runner agent)
+run-test @test/use-case-01.md
+
+# Run all tests
+run-all-tests
+```
+
+There are no build or lint steps — this is a documentation-only repository. The `make setup` target is the only Makefile command. Tests are run through the Azure RBAC Test Runner custom agent, not a CLI test framework.
+
+---
+
 ## Setup
 
 After cloning, create the `log/` and `answer/` runtime directories required by the Azure RBAC Advisor agent:
@@ -13,6 +30,8 @@ make setup
 ```
 
 `log/` is gitignored. `answer/` is tracked in git (answer files are committed so output quality can be compared over time). Both directories must exist locally for the agent to write files.
+
+A GitHub Actions workflow (`.github/ensure-dirs.yml`) also ensures these directories exist on every push to `main`, so they are automatically created if missing after a fresh clone on CI.
 
 ---
 
@@ -357,3 +376,9 @@ When adding a `Related Resources` link to Key Vault, link to the file in the **s
 - ❌ Recommend disabling security features (soft-delete, purge protection, private endpoints) for convenience.
 - ❌ Modify, reword, remove, or reorder any Runtime Dependencies row that ends with ` 🔒` in the Required / Optional column.
 - ❌ Add or remove the `🔒` marker from any row.
+
+---
+
+## MCP Server Configuration
+
+The repository includes an MCP (Model Context Protocol) server configuration in `.github/copilot-mcp.json` that provides a **fetch** server. This server is used by the custom agents (particularly the Knowledge Author) to fetch and verify Azure role names against live Microsoft documentation. The fetch server is auto-provisioned via `npx @modelcontextprotocol/server-fetch` — no manual installation required.
