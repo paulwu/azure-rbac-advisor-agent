@@ -36,6 +36,7 @@ AI Landing Zone Subscription
 |---|---|---|---|
 | Create AI Foundry Hub | Resource Group | `Contributor` | Creates a Hub workspace and linked resources (Storage, Key Vault, ACR, App Insights). |
 | Create AI Foundry Project | Hub | `Azure AI Developer` (on hub) | Projects inherit hub connectivity. Hub admin can delegate project creation. |
+| Create AI Foundry Project (project-scoped management) | Hub | `Azure AI Project Manager` (on hub) *(preview)* | Allows project creation and lifecycle management without full developer permissions. |
 | Connect Azure OpenAI to Hub | Hub | `Contributor` (Hub) + `Cognitive Services Contributor` (OpenAI resource) | Adds OpenAI as a hub connection. |
 | Connect AI Search to Hub | Hub | `Contributor` (Hub) + `Search Service Contributor` (Search resource) | |
 | Deploy a model in AI Foundry (model catalog) | Project | `Azure AI Developer` | Deploy base or fine-tuned models via the AI Foundry model catalog. |
@@ -61,6 +62,7 @@ AI Landing Zone Subscription
 | Operation | Scope | Least-Privileged Role | Notes |
 |---|---|---|---|
 | Use AI Foundry (build prompt flows, run evaluations) | Project | `Azure AI Developer` | Core role for AI developers working within a project. |
+| Manage project-level resources (knowledge bases, data sources) | Project | `Azure AI Project Manager` *(preview)* | Manage Foundry IQ knowledge bases, connect data sources, and configure agentic retrieval within a project. Does not grant prompt flow authoring or model deployment. |
 | Manage hub-level settings and projects | Hub | `Azure AI Administrator` | Hub-level administration including managing connections and project creation. |
 | Read project contents (view-only) | Project | `Reader` | View prompt flows, evaluations, and deployments. |
 | Submit inference requests via project endpoint | Project | `Azure AI User` | Minimum role for invoking deployed model endpoints within a project. |
@@ -69,12 +71,13 @@ AI Landing Zone Subscription
 
 ## AI Foundry Role Summary
 
-| Role | Create Projects | Author Prompt Flows | Deploy Models | Admin Hub | Inference Only |
-|---|---|---|---|---|---|
-| `Azure AI Administrator` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `Azure AI Developer` | ✅ (in hub) | ✅ | ✅ | ❌ | ✅ |
-| `Azure AI User` | ❌ | ❌ | ❌ | ❌ | ✅ |
-| `Reader` | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Role | Create Projects | Author Prompt Flows | Deploy Models | Manage Knowledge Bases | Admin Hub | Inference Only |
+|---|---|---|---|---|---|---|
+| `Azure AI Administrator` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `Azure AI Developer` | ✅ (in hub) | ✅ | ✅ | ✅ | ❌ | ✅ |
+| `Azure AI Project Manager` *(preview)* | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| `Azure AI User` | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `Reader` | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ## Hub Managed Identity — Required Roles on Connected Resources
 
@@ -105,7 +108,8 @@ AI Landing Zone Subscription
 - **Hub vs Project scope**: Connections defined at the Hub level are available to all projects; project-level connections are scoped to that project only.
 - **Managed Virtual Network** for the Hub (recommended) creates an isolated network for all hub compute and connections — set to `Allow Internet Outbound` or `Allow Only Approved Outbound` based on policy.
 - **Prompt flow** in AI Foundry uses the project's connected compute (serverless or Azure ML compute) — no additional RBAC needed beyond `Azure AI Developer` for compute usage.
-- The AI Foundry roles (`Azure AI Administrator`, `Azure AI Developer`, `Azure AI User`) are relatively new as of 2024 — verify they are available in your region/subscription.
+- **`Azure AI Project Manager`** *(preview)* is a project-scoped role for managing Foundry IQ knowledge bases, connecting data sources, and configuring agentic retrieval — without granting prompt flow authoring or model deployment capabilities. Ideal for knowledge base administrators who do not need full developer access.
+- The AI Foundry roles (`Azure AI Administrator`, `Azure AI Developer`, `Azure AI Project Manager`, `Azure AI User`) are relatively new — verify they are available in your region/subscription. `Azure AI Project Manager` is in public preview and may change before GA.
 
 ## Related Resources
 
